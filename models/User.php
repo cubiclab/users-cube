@@ -37,16 +37,12 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
             [['email', 'username'], 'unique'],
             [['email', 'username'], 'filter', 'filter' => 'trim'],
             [['email'], 'email'],
-            [['username'], 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u', 'message' => Yii::t('usercubic', '{attribute} can contain only letters, numbers, and "_"')],
+            [['username'], 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u', 'message' => Yii::t('userscube', '{attribute} can contain only letters, numbers, and "_"')],
 
             // password rules
-            [['newPassword'], 'string', 'min' => 4],
-            [['newPassword'], 'filter', 'filter' => 'trim'],
-            [['newPassword'], 'required', 'on' => ['register', 'reset']],
-            [['newPasswordConfirm'], 'required', 'on' => ['reset']],
-            [['newPasswordConfirm'], 'compare', 'compareAttribute' => 'newPassword', 'message' => Yii::t('usercubic','Passwords do not match')],
-            [['currentPassword'], 'required', 'on' => ['account']],
-            [['currentPassword'], 'validateCurrentPassword', 'on' => ['account']],
+            [['password'], 'string', 'min' => 4],
+            [['password'], 'filter', 'filter' => 'trim'],
+            [['password'], 'required', 'on' => ['register', 'reset']]
         ];
     }
 
@@ -54,23 +50,23 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
     public function attributeLabels(){
         return [
             // db fields
-            'id'            => Yii::t('usercubic', 'ID'),
-            'username'      => Yii::t('usercubic', 'Username'),
-            'password'      => Yii::t('usercubic', 'Password'),
-            'email'         => Yii::t('usercubic', 'Email'),
-            'auth_key'      => Yii::t('usercubic', 'Auth Key'),
-            'api_key'       => Yii::t('usercubic', 'Api Key'),
-            'status'        => Yii::t('usercubic', 'Status'),
-            'login_ip'      => Yii::t('usercubic', 'Login Ip'),
-            'login_time'    => Yii::t('usercubic', 'Login Time'),
-            'created_at'    => Yii::t('usercubic', 'Created At'),
-            'updated_at'    => Yii::t('usercubic', 'Updated At'),
-            'created_by'    => Yii::t('usercubic', 'Created By'),
-            'updated_by'    => Yii::t('usercubic', 'Updated By'),
+            'id'            => Yii::t('userscube', 'ID'),
+            'username'      => Yii::t('userscube', 'Username'),
+            'password'      => Yii::t('userscube', 'Password'),
+            'email'         => Yii::t('userscube', 'Email'),
+            'auth_key'      => Yii::t('userscube', 'Auth Key'),
+            'api_key'       => Yii::t('userscube', 'Api Key'),
+            'status'        => Yii::t('userscube', 'Status'),
+            'login_ip'      => Yii::t('userscube', 'Login Ip'),
+            'login_time'    => Yii::t('userscube', 'Login Time'),
+            'created_at'    => Yii::t('userscube', 'Created At'),
+            'updated_at'    => Yii::t('userscube', 'Updated At'),
+            'created_by'    => Yii::t('userscube', 'Created By'),
+            'updated_by'    => Yii::t('userscube', 'Updated By'),
             // tech fields
-            'currentPassword'    => Yii::t('usercubic', 'Current Password'),
-            'newPassword'        => Yii::t('usercubic', 'New Password'),
-            'newPasswordConfirm' => Yii::t('usercubic', 'New Password Confirm'),
+            'currentPassword'    => Yii::t('userscube', 'Current Password'),
+            'newPassword'        => Yii::t('userscube', 'New Password'),
+            'newPasswordConfirm' => Yii::t('userscube', 'New Password Confirm'),
         ];
     }
 
