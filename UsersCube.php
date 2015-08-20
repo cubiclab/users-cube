@@ -24,8 +24,8 @@ class UsersCube extends \yii\base\Module //implements BootstrapInterface
         parent::init();
 
         // set up i8n
-        if (empty(Yii::$app->i18n->translations['usercube'])) {
-            Yii::$app->i18n->translations['usercube'] = [
+        if (empty(Yii::$app->i18n->translations['userscube'])) {
+            Yii::$app->i18n->translations['userscube'] = [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => __DIR__ . '/messages',
             ];
