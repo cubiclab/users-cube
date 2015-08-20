@@ -5,47 +5,61 @@ use yii\db\Migration;
 
 class m200809_121517_init_user_table extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%user}}', [
+        // Users table
+        $this->createTable('{{%users}}', [
             'id'            => Schema::TYPE_PK,
-            'username'      => Schema::TYPE_STRING . ' null default null',
-            'password'      => Schema::TYPE_STRING . ' null default null',
-            'email'         => Schema::TYPE_STRING . ' null default null',
-            'auth_key'      => Schema::TYPE_STRING . ' null default null',
-            'api_key'       => Schema::TYPE_STRING . ' null default null',
-            'status'        => Schema::TYPE_SMALLINT . ' not null',
-            'login_ip'      => Schema::TYPE_STRING . ' null default null',
-            'login_time'    => Schema::TYPE_INTEGER . ' null default null',
-            'created_at'    => Schema::TYPE_INTEGER . ' null default null',
-            'updated_at'    => Schema::TYPE_INTEGER . ' null default null',
-            'created_by'    => Schema::TYPE_INTEGER . ' null default null',
-            'updated_by'    => Schema::TYPE_INTEGER . ' null default null',
+            'username'      => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            'password'      => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            'email'         => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            'auth_key'      => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            'api_key'       => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            'status'        => Schema::TYPE_SMALLINT . ' NOT NULL',
+            'login_ip'      => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            'login_time'    => Schema::TYPE_INTEGER . ' NULL DEFAULT NULL',
+            'created_at'    => Schema::TYPE_INTEGER . ' NULL DEFAULT NULL',
+            'updated_at'    => Schema::TYPE_INTEGER . ' NULL DEFAULT NULL',
+            'created_by'    => Schema::TYPE_INTEGER . ' NULL DEFAULT NULL',
+            'updated_by'    => Schema::TYPE_INTEGER . ' NULL DEFAULT NULL',
         ], $tableOptions);
-    }
 
-    public function down()
-    {
-        echo "m150809_121517_init_user_table cannot be reverted.\n";
+        // Indexes
+        $this->createIndex('username', '{{%users}}', 'username', true);
+        $this->createIndex('email', '{{%users}}', 'email', true);
+        $this->createIndex('status', '{{%users}}', 'status');
+        $this->createIndex('created_at', '{{%users}}', 'created_at');
 
-        $this->dropTable('{{%user}}');
+        // Profiles table
+        $this->createTable(
+            '{{%users_profiles}}',
+            [
+                'user_id'   => Schema::TYPE_PK,
+                'name'      => Schema::TYPE_STRING . '(50) NOT NULL',
+                'surname'   => Schema::TYPE_STRING . '(50) NOT NULL',
+                'phone'     => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+                'address'   => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            ],
+            $tableOptions
+        );
 
-        return false;
-    }
+        // Foreign Keys
+        $this->addForeignKey('FK_profile_user', '{{%users_profiles}}', 'user_id', '{{%users}}', 'id', 'CASCADE', 'CASCADE');
 
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
+        //TODO: Add a root user
     }
 
     public function safeDown()
     {
+        $this->dropForeignKey('FK_profile_user', '{{%users_profiles}}');
+
+        $this->dropTable('{{%users_profiles}}');
+        $this->dropTable('{{%users}}');
     }
-    */
+
 }

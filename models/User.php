@@ -37,7 +37,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
 
      /** @inheritdoc */
     public static function tableName(){
-        return static::getDb()->tablePrefix . "user";
+        return static::getDb()->tablePrefix . "users";
     }
 
     /** @inheritdoc */
