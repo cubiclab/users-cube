@@ -23,7 +23,7 @@ use yii\behaviors\TimestampBehavior;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
 
 
-    /** @inheritdoc */
+     /** @inheritdoc */
     public static function tableName(){
         return static::getDb()->tablePrefix . "user";
     }
