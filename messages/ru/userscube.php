@@ -7,32 +7,25 @@
  */
 
 return [
-    'ID'            => '№',
-    'Username'      => 'Логин пользователя',
-    'Password'      => 'Пароль',
-    'Email'         => 'E-mail адрес',
-    'New Email'     => 'Новый E-mail адрес',
-    'Auth Key'      => 'Ключ авторизации',
-    'Api Key'       => 'Ключ API',
-    'Status'        => 'Статус',
-    'Login Ip'      => 'IP авторизации',
-    'Login Time'    => 'Дата авторизации',
-    'Created At'    => 'Дата авторизации',
-    'Updated At'    => 'Дата авторизации',
-    'Created By'    => 'Дата авторизации',
-    'Updated By'    => 'Дата авторизации',
-
-    'Current Password'        => 'Настоящий пароль',
-    'New Password'            => 'Новый пароль',
-    'New Password Confirm'    => 'Повтор нового пароля',
-
-    'Passwords do not match' => 'Пароли не совпадают',
-    '{attribute} can contain only letters, numbers, and "_"' => '{attribute} может содержать только буквы, цифры и "_"',
+    // User Model
+    'ATTR_ID'            => 'в„–',
+    'ATTR_USERNAME'      => 'Р›РѕРіРёРЅ',
+    'ATTR_PASSWORD'      => 'РџР°СЂРѕР»СЊ',
+    'ATTR_EMAIL'         => 'E-mail',
+    'ATTR_AUTH_KEY'      => 'РљР»СЋС‡ Р°РІС‚РѕСЂРёР·Р°С†РёРё',
+    'ATTR_API_KEY'       => 'РљР»СЋС‡ API',
+    'ATTR_STATUS'        => 'РЎС‚Р°С‚СѓСЃ',
+    'ATTR_LOGIN_IP'      => 'IP Р°РІС‚РѕСЂРёР·Р°С†РёРё',
+    'ATTR_LOGIN_TIME'    => 'Р”Р°С‚Р° Р°РІС‚РѕСЂРёР·Р°С†РёРё',
+    'ATTR_CREATED_AT'    => 'Р”Р°С‚Р° СЃРѕР·РґР°РЅРёСЏ',
+    'ATTR_UPDATED_AT'    => 'Р”Р°С‚Р° РѕР±РЅРѕРІР»РµРЅРёСЏ',
+    'ATTR_CREATED_BY'    => 'РЎРѕР·РґР°РЅРѕ',
+    'ATTR_UPDATED_BY'    => 'РћР±РЅРѕРІР»РµРЅРѕ',
+    'PATTERN_USERNAME' => 'РџРѕР»Рµ РјРѕР¶РµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ С‚РѕР»СЊРєРѕ Р±СѓРєРІС‹, С†РёС„СЂС‹ Рё "_"',
 
     //Signup form
-    'SIGNUP_FORM_WELCOME_TITLE'         => 'Регистрация',
-    'SIGNUP_FORM_WELCOME_MESSAGE'       => 'Введите свои регистрационные данные',
-    'SIGNUP_FORM_SUBMIT_BTN_MESSAGE'    => 'Зарегистрироваться',
-    'SIGNUP_FORM_LOGIN_LINK'            => 'Войти',
-
+    'SIGNUP_FORM_WELCOME_TITLE'         => 'Р РµРіРёСЃС‚СЂР°С†РёСЏ',
+    'SIGNUP_FORM_WELCOME_MESSAGE'       => 'Р’РІРµРґРёС‚Рµ СЃРІРѕРё СЂРµРіРёСЃС‚СЂР°С†РёРѕРЅРЅС‹Рµ РґР°РЅРЅС‹Рµ',
+    'SIGNUP_FORM_SUBMIT_BTN_MESSAGE'    => 'Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ',
+    'SIGNUP_FORM_LOGIN_LINK'            => 'Р’РѕР№С‚Рё',
 ];

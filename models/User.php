@@ -37,7 +37,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
             [['email', 'username'], 'unique'],
             [['email', 'username'], 'filter', 'filter' => 'trim'],
             [['email'], 'email'],
-            [['username'], 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u', 'message' => Yii::t('userscube', '{attribute} can contain only letters, numbers, and "_"')],
+            [['username'], 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u', 'message' => Yii::t('userscube', 'PATTERN_USERNAME')],
 
             // password rules
             [['password'], 'string', 'min' => 4],
@@ -50,23 +50,19 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
     public function attributeLabels(){
         return [
             // db fields
-            'id'            => Yii::t('userscube', 'ID'),
-            'username'      => Yii::t('userscube', 'Username'),
-            'password'      => Yii::t('userscube', 'Password'),
-            'email'         => Yii::t('userscube', 'Email'),
-            'auth_key'      => Yii::t('userscube', 'Auth Key'),
-            'api_key'       => Yii::t('userscube', 'Api Key'),
-            'status'        => Yii::t('userscube', 'Status'),
-            'login_ip'      => Yii::t('userscube', 'Login Ip'),
-            'login_time'    => Yii::t('userscube', 'Login Time'),
-            'created_at'    => Yii::t('userscube', 'Created At'),
-            'updated_at'    => Yii::t('userscube', 'Updated At'),
-            'created_by'    => Yii::t('userscube', 'Created By'),
-            'updated_by'    => Yii::t('userscube', 'Updated By'),
-            // tech fields
-            'currentPassword'    => Yii::t('userscube', 'Current Password'),
-            'newPassword'        => Yii::t('userscube', 'New Password'),
-            'newPasswordConfirm' => Yii::t('userscube', 'New Password Confirm'),
+            'id'            => Yii::t('userscube', 'ATTR_ID'),
+            'username'      => Yii::t('userscube', 'ATTR_USERNAME'),
+            'password'      => Yii::t('userscube', 'ATTR_PASSWORD'),
+            'email'         => Yii::t('userscube', 'ATTR_EMAIL'),
+            'auth_key'      => Yii::t('userscube', 'ATTR_AUTH_KEY'),
+            'api_key'       => Yii::t('userscube', 'ATTR_API_KEY'),
+            'status'        => Yii::t('userscube', 'ATTR_STATUS'),
+            'login_ip'      => Yii::t('userscube', 'ATTR_LOGIN_IP'),
+            'login_time'    => Yii::t('userscube', 'ATTR_LOGIN_TIME'),
+            'created_at'    => Yii::t('userscube', 'ATTR_CREATED_AT'),
+            'updated_at'    => Yii::t('userscube', 'ATTR_UPDATED_AT'),
+            'created_by'    => Yii::t('userscube', 'ATTR_CREATED_BY'),
+            'updated_by'    => Yii::t('userscube', 'ATTR_UPDATED_BY'),
         ];
     }
 
