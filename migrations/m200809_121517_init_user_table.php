@@ -36,17 +36,13 @@ class m200809_121517_init_user_table extends Migration
         $this->createIndex('created_at', '{{%users}}', 'created_at');
 
         // Profiles table
-        $this->createTable(
-            '{{%users_profiles}}',
-            [
-                'user_id'   => Schema::TYPE_PK,
-                'name'      => Schema::TYPE_STRING . '(50) NOT NULL',
-                'surname'   => Schema::TYPE_STRING . '(50) NOT NULL',
-                'phone'     => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
-                'address'   => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
-            ],
-            $tableOptions
-        );
+        $this->createTable('{{%users_profiles}}', [
+            'user_id'   => Schema::TYPE_PK,
+            'name'      => Schema::TYPE_STRING . '(50) NOT NULL',
+            'surname'   => Schema::TYPE_STRING . '(50) NOT NULL',
+            'phone'     => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            'address'   => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+        ], $tableOptions);
 
         // Foreign Keys
         $this->addForeignKey('FK_profile_user', '{{%users_profiles}}', 'user_id', '{{%users}}', 'id', 'CASCADE', 'CASCADE');
