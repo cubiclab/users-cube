@@ -18,6 +18,9 @@ class UsersCube extends \yii\base\Module //implements BootstrapInterface
     /** @var string Alias for module */
     public $alias = "@usercube";
 
+    /** @var boolean If true after registration user will be required to confirm his e-mail address. */
+    public $requireEmailConfirmation = true;
+
     /** @inheritdoc */
     public function init()
     {

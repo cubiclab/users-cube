@@ -13,6 +13,8 @@ use yii\base\NotSupportedException;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
+use yii\userscube\traits\ModuleTrait;
+
 /**
  * This is the model class for table "user".
  *
@@ -22,6 +24,16 @@ use yii\behaviors\TimestampBehavior;
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
 
+    use ModuleTrait;
+
+    /** Inactive status */
+    const STATUS_INACTIVE = 0;
+    /** Active status */
+    const STATUS_ACTIVE = 1;
+    /** Banned status */
+    const STATUS_BLOCKED = 2;
+    /** Deleted status */
+    const STATUS_DELETED = 3;
 
      /** @inheritdoc */
     public static function tableName(){
@@ -67,10 +79,12 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
     }
 
     /** @inheritdoc */
-    public function behaviors(){
+    public function behaviors()
+    {
         return [
-            BlameableBehavior::className(),
-            TimestampBehavior::className(),
+            'timestampBehavior' => [
+                'class' => TimestampBehavior::className(),
+            ]
         ];
     }
 
@@ -112,18 +126,24 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
 
     /** @inheritdoc */
     public function beforeSave($insert){
-        $return = parent::beforeSave($insert);
+        if (parent::beforeSave($insert)) {
+            if($this->isAttributeChanged('password')) {
+                $this->password = Yii::$app->security->generatePasswordHash($this->password);
+            }
 
-        if($this->isAttributeChanged('password')) {
-            $this->password = Yii::$app->security->generatePasswordHash($this->password);
+            if ($this->isNewRecord) {
+                if (!$this->status_id) {
+                    $this->status_id = $this->module->requireEmailConfirmation ? self::STATUS_INACTIVE : self::STATUS_ACTIVE;
+                }
+
+                // Generate auth
+                $this->auth_key = Yii::$app->security->generateRandomKey($length = 255);
+            }
+            return true;
         }
-
-        if($this->isNewRecord){
-            $this->auth_key = Yii::$app->security->generateRandomKey($length = 255);
-        }
-
-        return $return;
+        return false;
     }
+
 
 
 
