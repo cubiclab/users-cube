@@ -21,9 +21,9 @@ class m200809_121517_init_user_table extends Migration
             'api_key'       => Schema::TYPE_STRING . ' null default null',
             'status'        => Schema::TYPE_SMALLINT . ' not null',
             'login_ip'      => Schema::TYPE_STRING . ' null default null',
-            'login_time'    => Schema::TYPE_TIMESTAMP . ' null default null',
-            'created_at'    => Schema::TYPE_TIMESTAMP . ' null default null',
-            'updated_at'    => Schema::TYPE_TIMESTAMP . ' null default null',
+            'login_time'    => Schema::TYPE_INTEGER . ' null default null',
+            'created_at'    => Schema::TYPE_INTEGER . ' null default null',
+            'updated_at'    => Schema::TYPE_INTEGER . ' null default null',
             'created_by'    => Schema::TYPE_INTEGER . ' null default null',
             'updated_by'    => Schema::TYPE_INTEGER . ' null default null',
         ], $tableOptions);
