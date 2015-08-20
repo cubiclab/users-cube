@@ -4,7 +4,7 @@
     "description": "Yii2 Users Module (Cube) - Development package",
     "keywords": ["cubiclab"],
     "type": "yii2-extension",
-    "license": "GNU GPL V3",
+    "license": "GNU GPL V2",
     "minimum-stability": "dev",
     "authors": [
         {
@@ -17,7 +17,8 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-swiftmailer": "*"
+        "yiisoft/yii2-swiftmailer": "*",
+        "cubiclab/base-cube": "*"
     },
     "autoload": {
         "psr-4": {
