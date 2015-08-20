@@ -28,4 +28,11 @@ return [
 
     'Passwords do not match' => 'Пароли не совпадают',
     '{attribute} can contain only letters, numbers, and "_"' => '{attribute} может содержать только буквы, цифры и "_"',
+
+    //Signup form
+    'SIGNUP_FORM_WELCOME_TITLE'         => 'Регистрация',
+    'SIGNUP_FORM_WELCOME_MESSAGE'       => 'Введите свои регистрационные данные',
+    'SIGNUP_FORM_SUBMIT_BTN_MESSAGE'    => 'Зарегистрироваться',
+    'SIGNUP_FORM_LOGIN_LINK'            => 'Войти',
+
 ];
