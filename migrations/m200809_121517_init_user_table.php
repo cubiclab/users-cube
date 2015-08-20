@@ -7,16 +7,6 @@ class m200809_121517_init_user_table extends Migration
 {
     public function up()
     {
-        $this->createTable(
-            'user',
-            [
-                'id' => 'pk',
-                'username' => 'string UNIQUE',
-                'password' => 'string',
-                'auth_key' => 'string UNIQUE',
-            ]
-        );
-
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
@@ -37,8 +27,6 @@ class m200809_121517_init_user_table extends Migration
             'created_by'    => Schema::TYPE_INTEGER . ' null default null',
             'updated_by'    => Schema::TYPE_INTEGER . ' null default null',
         ], $tableOptions);
-
-
     }
 
     public function down()
