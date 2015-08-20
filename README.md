@@ -9,3 +9,7 @@ With Composer installed, you can then install the Cube using the following comma
 
     composer require cubiclab/users-cube:"dev-master"
 
+Migrations:
+
+    yii migrate --migrationPath="@vendor/cubiclab/users-cube/migrations"
+

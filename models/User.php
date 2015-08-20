@@ -84,7 +84,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
         return [
             'timestampBehavior' => [
                 'class' => TimestampBehavior::className(),
-            ]
+            ],
+            'blameableBehavior' => [
+                'class' => BlameableBehavior::className(),
+            ],
         ];
     }
 
@@ -132,8 +135,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
             }
 
             if ($this->isNewRecord) {
-                if (!$this->status_id) {
-                    $this->status_id = $this->module->requireEmailConfirmation ? self::STATUS_INACTIVE : self::STATUS_ACTIVE;
+                if (!$this->status) {
+                    $this->status = $this->module->requireEmailConfirmation ? self::STATUS_INACTIVE : self::STATUS_ACTIVE;
                 }
 
                 // Generate auth

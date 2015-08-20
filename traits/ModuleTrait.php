@@ -13,7 +13,7 @@ use yii\userscube\UsersCube;
 
 /**
  * Class ModuleTrait
- * @package vova07\users\traits
+ * @package yii\userscube\traits
  * Implements `getModule` method, to receive current module instance.
  */
 trait ModuleTrait{
