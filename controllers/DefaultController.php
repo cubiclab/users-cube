@@ -8,6 +8,7 @@
 
 namespace cubiclab\users\controllers;
 
+
 use Yii;
 use yii\web\Controller;
 use yii\widgets\ActiveForm;
@@ -15,11 +16,14 @@ use yii\filters\AccessControl;
 use yii\web\Response;
 
 use cubiclab\users\models\User;
-
+use cubiclab\users\traits\ModuleTrait;
+use cubiclab\users\models\forms\SigninForm;
 
 /** Default controller for Usercube module */
 class DefaultController extends Controller
 {
+
+    use ModuleTrait;
 
     /** Redirect to login page or profile management page */
     public function actionIndex()
@@ -28,26 +32,6 @@ class DefaultController extends Controller
             return $this->redirect(["/users/login"]);
         } else {
             return $this->redirect(["/users/profile"]);
-        }
-    }
-
-    /** Login page */
-    public function actionLogin()
-    {
-        return 'Login Page';
-    }
-
-    /** Logout */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-        // redirect
-        $logoutRedirect = Yii::$app->getModule("userscube")->logoutRedirect;
-        if ($logoutRedirect === null) {
-            return $this->goHome();
-        }
-        else {
-            return $this->redirect($logoutRedirect);
         }
     }
 
@@ -89,6 +73,44 @@ class DefaultController extends Controller
                 'user' => $user
             ]
         );
+    }
+
+    /** Sign In page. (Login) */
+    public function actionSignin(){
+        if (!Yii::$app->user->isGuest) {
+            $this->goHome();
+        }
+
+        /** @var \cubiclab\users\models\forms\SigninForm $model */
+        $model = new SigninForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login($this->module->loginDuration)) {
+            $loginRedirect = $this->module->loginRedirect;
+            if ($loginRedirect === null) {
+                return $this->goHome();
+            } else {
+                return $this->goBack($this->module->loginRedirect);
+            }
+        }
+
+        // render view
+        return $this->render(
+            'signin',
+            [
+                'model' => $model,
+            ]
+        );
+    }
+
+    /** Sign Out page. (Logout) */
+    public function actionSignout() {
+        Yii::$app->user->logout();
+        // redirect
+        $logoutRedirect = $this->module->logoutRedirect;
+        if ($logoutRedirect === null) {
+            return $this->goHome();
+        } else {
+            return $this->redirect($logoutRedirect);
+        }
     }
 
 

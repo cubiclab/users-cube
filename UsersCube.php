@@ -21,6 +21,26 @@ class UsersCube extends \yii\base\Module //implements BootstrapInterface
     /** @var boolean If true after registration user will be required to confirm his e-mail address. */
     public $requireEmailConfirmation = true;
 
+    /** @var bool If true, users can log in using their email */
+    public $loginEmail = true;
+
+    /** @var bool If true, users can log in using their username */
+    public $loginUsername = true;
+
+    /** @var int Login duration */
+    public $loginDuration = 3600 * 24 * 30;
+
+    /**
+     * @var array|string|null Url to redirect to after logging in. If null, will redirect to home page. Note that
+     *                        AccessControl takes precedence over this (see [[yii\web\User::loginRequired()]])
+     */
+    public $loginRedirect = null;
+
+    /**
+     * @var array|string|null Url to redirect to after logging out. If null, will redirect to home page
+     */
+    public $logoutRedirect = null;
+
     /** @inheritdoc */
     public function init()
     {

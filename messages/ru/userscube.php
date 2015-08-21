@@ -21,11 +21,22 @@ return [
     'ATTR_UPDATED_AT'    => 'Дата обновления',
     'ATTR_CREATED_BY'    => 'Создано',
     'ATTR_UPDATED_BY'    => 'Обновлено',
-    'PATTERN_USERNAME' => 'Поле может содержать только буквы, цифры и "_"',
+    'PATTERN_USERNAME'   => 'Поле может содержать только буквы, цифры и "_"',
+    'ATTR_REMEMBER_ME'   => 'Запомнить',
 
     //Signup form
     'SIGNUP_FORM_WELCOME_TITLE'         => 'Регистрация',
     'SIGNUP_FORM_WELCOME_MESSAGE'       => 'Введите свои регистрационные данные',
     'SIGNUP_FORM_SUBMIT_BTN_MESSAGE'    => 'Зарегистрироваться',
     'SIGNUP_FORM_LOGIN_LINK'            => 'Войти',
+
+    //Login form
+    'SIGNIN_FORM_WELCOME_TITLE'         => 'Вход',
+    'SIGNIN_FORM_WELCOME_MESSAGE'       => 'Для входа заполните поля ниже:',
+    'SIGNIN_FORM_REGISTER'              => 'Зарегистрироваться',
+    'SIGNIN_FORM_FORGOT_PWD'            => 'Забыли пароль',
+    'SIGNIN_FORM_RESEND_CONF_EMAIL'     => 'Выслать письмо активации',
+    'SIGNIN_FORM_SUBMIT_BTN_MESSAGE'    => 'Войти',
+    'ERR_INCORRECT_PASSWORD'            => 'Неверный пароль',
+    'ERR_NOT_FOUND'                     => 'не найдено',
 ];
