@@ -6,7 +6,7 @@
  * Time: 13:04
  */
 
-namespace yii\userscube\controllers;
+namespace cubiclab\users\controllers;
 
 use Yii;
 use yii\web\Controller;
@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
 use yii\web\Response;
 
-use yii\userscube\models\User;
+use cubiclab\users\models\User;
 
 
 /** Default controller for Usercube module */

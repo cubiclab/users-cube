@@ -6,14 +6,14 @@
  * Time: 8:28
  */
 
-namespace yii\userscube\models;
+namespace cubiclab\users\models;
 
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
-use yii\userscube\traits\ModuleTrait;
+use cubiclab\users\traits\ModuleTrait;
 
 /**
  * This is the model class for table "user".

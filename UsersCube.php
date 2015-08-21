@@ -1,5 +1,5 @@
 <?php
-namespace yii\userscube;
+namespace cubiclab\users;
 
 use Yii;
 use yii\base\BootstrapInterface;

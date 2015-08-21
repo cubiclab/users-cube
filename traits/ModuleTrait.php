@@ -6,10 +6,10 @@
  * Time: 16:41
  */
 
-namespace yii\userscube\traits;
+namespace cubiclab\users\traits;
 
 use Yii;
-use yii\userscube\UsersCube;
+use cubiclab\users\UsersCube;
 
 /**
  * Class ModuleTrait
@@ -17,10 +17,10 @@ use yii\userscube\UsersCube;
  * Implements `getModule` method, to receive current module instance.
  */
 trait ModuleTrait{
-    /** @var \yii\userscube\UsersCube|null Module instance */
+    /** @var \cubiclab\users\UsersCube|null Module instance */
     private $_module;
 
-    /** @return \yii\userscube\UsersCube|null Module instance */
+    /** @return \cubiclab\users\UsersCube|null Module instance */
     public function getModule(){
         if ($this->_module === null) {
             $module = UsersCube::getInstance();
