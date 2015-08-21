@@ -9,7 +9,7 @@ use yii\db\ActiveRecord;
 /**
  * @version 0.0.1-prealpha
  */
-class UsersCube extends \yii\base\Module //implements BootstrapInterface
+class UsersCube extends \yii\base\Module implements BootstrapInterface
 {
 
     /** @const VERSION Module version */
@@ -45,14 +45,7 @@ class UsersCube extends \yii\base\Module //implements BootstrapInterface
     public function init()
     {
         parent::init();
-
-        // set up i8n
-        if (empty(Yii::$app->i18n->translations['userscube'])) {
-            Yii::$app->i18n->translations['userscube'] = [
-                'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => __DIR__ . '/messages',
-            ];
-        }
+        $this->registerTranslations();
 
         $this->setAliases([
             $this->alias => __DIR__,
@@ -60,8 +53,24 @@ class UsersCube extends \yii\base\Module //implements BootstrapInterface
 
     }
 
-/*    public function bootstrap($app)
+    public function registerTranslations()
     {
-        Yii::setAlias('userscube', '@vendor/cubiclab/users-cube');
-    }*/
+        if (empty(Yii::$app->i18n->translations['userscube'])) {
+            Yii::$app->i18n->translations['userscube'] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => __DIR__ . '/messages',
+            ];
+        }
+    }
+
+    public function bootstrap($app){
+        // Add module URL rules.
+        $app->urlManager->addRules(
+            [
+                '<_m:users>' => '<_m>/default/signin',
+                '<_a:(signin|signup|signout)>' => 'users/default/<_a>',
+            ],
+            false
+        );;
+    }
 }
