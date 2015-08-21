@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "yii\\userscube\\": "/"
+            "cubiclab\\users\\": "/"
         }
     },
     "extra": {
