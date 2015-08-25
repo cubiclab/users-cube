@@ -34,6 +34,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
     const STATUS_BLOCKED = 2;
     /** Deleted status */
     const STATUS_DELETED = 3;
+    /** @var string Model status. */
+    private $_status;
+
+    public $role;
 
      /** @inheritdoc */
     public static function tableName(){
@@ -96,9 +100,41 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
         return $this->id;
     }
 
+    /**
+     * getUserName
+     *
+     * @return string Username
+     */
+    public function getUserName(){
+        return $this->username;
+    }
+
     /** @inheritdoc */
     public static function findIdentity($id){
         return static::findOne($id);
+    }
+
+    /**
+     * Find users by IDs.
+     *
+     * @param $ids Users IDs
+     * @param null $scope Scope
+     *
+     * @return array|\yii\db\ActiveRecord[] Users
+     */
+    public static function findIdentities($ids, $scope = null)
+    {
+        $query = static::find()->where(['id' => $ids]);
+        if ($scope !== null) {
+            if (is_array($scope)) {
+                foreach ($scope as $value) {
+                    $query->$value();
+                }
+            } else {
+                $query->$scope();
+            }
+        }
+        return $query->all();
     }
 
     /** @inheritdoc */
@@ -147,8 +183,42 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
         return false;
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersProfiles()
+    {
+        return $this->hasOne(Profile::className(), ['user_id' => 'id']);
+    }
 
+    /** @return array Status array. */
+    public static function getStatusArray(){
+        return [
+            self::STATUS_INACTIVE   => Yii::t('userscube', 'STATUS_INACTIVE'),
+            self::STATUS_ACTIVE     => Yii::t('userscube', 'STATUS_ACTIVE'),
+            self::STATUS_BLOCKED    => Yii::t('userscube', 'STATUS_BLOCKED'),
+            self::STATUS_DELETED    => Yii::t('userscube', 'STATUS_DELETED'),
+        ];
+    }
 
+    /** @return string Model status. */
+    public function getStatusName(){
+        if ($this->_status === null) {
+            $statuses = self::getStatusArray();
+            $this->_status = $statuses[$this->status];
+        }
+        return $this->_status;
+    }
+
+    public function getUserRolesNames()
+    {
+        $user_roles = Yii::$app->authManager->getRolesByUser($this->id);
+        $user_roles_names = '';
+        foreach($user_roles as $role){
+            $user_roles_names .= $role->name;
+        }
+        return $user_roles_names;
+    }
 
 
 }

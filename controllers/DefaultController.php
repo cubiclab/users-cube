@@ -28,11 +28,8 @@ class DefaultController extends Controller
     /** Redirect to login page or profile management page */
     public function actionIndex()
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(["/users/login"]);
-        } else {
-            return $this->redirect(["/users/profile"]);
-        }
+        // render debug page
+        return $this->render('debug_lnks');
     }
 
     /** Profile page */

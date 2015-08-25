@@ -9,13 +9,9 @@ With Composer installed, you can then install the Cube using the following comma
 
     composer require cubiclab/users-cube:"dev-master"
 
-Apply migration:
-
-    yii migrate --migrationPath="@vendor/cubiclab/users-cube/migrations"
-
 Add the following lines to your YII config:
 ```php
-// app/config/web.php
+// app/config/web.php & app/config/console.php
 return [
     'language' => 'en', // 'ru'
     'modules' => [
@@ -27,6 +23,15 @@ return [
         'user' => [
             'identityClass' => 'cubiclab\users\models\User'
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
     ],
 ];
 ```
+
+Apply migrations:
+
+    $ yii migrate --migrationPath="@vendor/cubiclab/users-cube/migrations"
+    $ yii migrate --migrationPath=@yii/rbac/migrations/
+

@@ -16,7 +16,7 @@ class UsersCube extends \yii\base\Module implements BootstrapInterface
     const VERSION = "0.0.1-prealpha";
 
     /** @var string Alias for module */
-    public $alias = "@usercube";
+    //public $alias = "@usercube";
 
     /** @var boolean If true after registration user will be required to confirm his e-mail address. */
     public $requireEmailConfirmation = true;
@@ -28,7 +28,7 @@ class UsersCube extends \yii\base\Module implements BootstrapInterface
     public $loginUsername = true;
 
     /** @var int Login duration */
-    public $loginDuration = 3600 * 24 * 30;
+    public $loginDuration = 2592000; //3600 * 24 * 30
 
     /**
      * @var array|string|null Url to redirect to after logging in. If null, will redirect to home page. Note that
@@ -47,9 +47,9 @@ class UsersCube extends \yii\base\Module implements BootstrapInterface
         parent::init();
         $this->registerTranslations();
 
-        $this->setAliases([
-            $this->alias => __DIR__,
-        ]);
+        //$this->setAliases([
+        //    $this->alias => __DIR__,
+        //]);
 
     }
 
