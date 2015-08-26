@@ -15,9 +15,6 @@ $this->title = 'Правила доступа';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="news-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Добавить новое правило', ['add-permission'], ['class' => 'btn btn-success']) ?>
     </p>

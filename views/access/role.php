@@ -16,9 +16,6 @@ $this->title = 'Управление ролями';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="news-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Добавить роль', ['add-role'], ['class' => 'btn btn-success']) ?>
     </p>
