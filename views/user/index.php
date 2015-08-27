@@ -12,6 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
 <?php
+$gridId = 'users-grid';
+
 $boxButtons = $actions = [];
 $showActions = false;
 //if (Yii::$app->user->can('ACPCreateUsers')) {
@@ -22,7 +24,7 @@ $boxButtons[] = '{create}';
     $showActions = $showActions || true;
 //}
 //if (Yii::$app->user->can('ACPDeleteUsers')) {
-    $boxButtons[] = '{batch-delete}';
+    $boxButtons[] = '{mass-delete}';
     $actions[] = '{delete}';
     $showActions = $showActions || true;
 //}
@@ -45,11 +47,12 @@ $boxButtons = !empty($boxButtons) ? implode(' ', $boxButtons) : null; ?>
         //    'class' => 'table-responsive'
         //],
         'buttonsTemplate' => $boxButtons,
-        //'grid' => $gridId
+        'grid' => $gridId
     ]
 ); ?>
 
 <?= GridView::widget([
+    'id' => $gridId,
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'columns' => [
