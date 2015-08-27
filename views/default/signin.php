@@ -10,40 +10,48 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = Yii::t('userscube', 'SIGNIN_FORM_WELCOME_TITLE');
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-default-login">
+<div class="login" data-pageload-addclass="animated fadeIn">
+    <div class="login-header">
+        <div class="brand">
+            <span class="logo"></span> Cubic CRM
+            <small><?= Yii::t('userscube', 'SIGNIN_FORM_WELCOME_MESSAGE') ?></small>
+        </div>
+        <div class="icon">
+            <i class="fa fa-sign-in"></i>
+        </div>
+    </div>
+    <div class="login-content">
+        <?php $form = ActiveForm::begin([
+            'id' => 'login-form',
+            'options' => ['class' => 'margin-bottom-0'],
+            'fieldConfig' => [
+                'template' => "<div class=\"form-group m-b-20\">{input}\n<div class=\"col-lg-7\">{error}</div></div>",
+            ],
+        ]);
+        //username field
+        echo $form->field($model, 'username', [
+            'inputOptions' => ['class' => 'form-control input-lg', 'placeholder' => Yii::t('userscube', 'ATTR_USERNAME')]]);
 
-    <h1><?= Html::encode($this->title) ?></h1>
+        //password field
+        echo $form->field($model, 'password', [
+            'inputOptions' => ['class' => 'form-control input-lg', 'placeholder' => Yii::t('userscube', 'ATTR_PASSWORD')]
+        ])->passwordInput();
 
-    <p><?= Yii::t('userscube', 'SIGNIN_FORM_WELCOME_MESSAGE') ?></p>
+        //remember me
+        echo $form->field($model, 'rememberMe', [
+            'template' => "<div class=\"checkbox m-b-20\"><label>{input} {label}</label></div><div class=\"col-lg-7\">{error}</div>",
+        ])->checkbox();
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'options' => ['class' => 'form-horizontal'],
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-7\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-2 control-label'],
-        ],
-    ]); ?>
-
-    <?= $form->field($model, 'username') ?>
-    <?= $form->field($model, 'password')->passwordInput() ?>
-    <?= $form->field($model, 'rememberMe', [
-        'template' => "{label}<div class=\"col-lg-offset-2 col-lg-3\">{input}</div>\n<div class=\"col-lg-7\">{error}</div>",
-    ])->checkbox() ?>
-
-    <div class="form-group">
-        <div class="col-lg-offset-2 col-lg-10">
-            <?= Html::submitButton(Yii::t('userscube', 'SIGNIN_FORM_SUBMIT_BTN_MESSAGE'), ['class' => 'btn btn-primary']) ?>
-
-            <br/><br/>
+        ?>
+        <div class="login-buttons">
+            <?= Html::submitButton(Yii::t('userscube', 'SIGNIN_FORM_SUBMIT_BTN_MESSAGE'), ['class' => 'btn btn-success btn-block btn-lg']) ?>
+        </div>
+        <div class="m-t-20"><br>
             <?= Html::a(Yii::t('userscube', 'SIGNIN_FORM_REGISTER'), ["/user/register"]) ?> /
             <?= Html::a(Yii::t('userscube', 'SIGNIN_FORM_FORGOT_PWD') . "?", ["/user/forgot"]) ?> /
             <?= Html::a(Yii::t('userscube', 'SIGNIN_FORM_RESEND_CONF_EMAIL'), ["/user/resend"]) ?>
         </div>
+        <?php ActiveForm::end(); ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

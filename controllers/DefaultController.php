@@ -42,6 +42,8 @@ class DefaultController extends Controller
     /** Sign Up page. (Registration) */
     public function actionSignup()
     {
+        $this->layout = '@vendor/cubiclab/admin-cube/views/layouts/signin';
+
         $user = new User(['scenario' => 'register']);
 
         // if register action is triggered
@@ -74,6 +76,8 @@ class DefaultController extends Controller
 
     /** Sign In page. (Login) */
     public function actionSignin(){
+        $this->layout = '@vendor/cubiclab/admin-cube/views/layouts/signin';
+
         if (!Yii::$app->user->isGuest) {
             $this->goHome();
         }
