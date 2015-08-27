@@ -91,4 +91,6 @@ echo GridView::widget([
     ]
 ]);
 
+echo Panel::end();
+
 ?>
