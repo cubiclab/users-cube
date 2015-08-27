@@ -16,7 +16,7 @@ use cubiclab\admin\widgets\Panel;
 
 use yii\grid\ActionColumn;
 
-$this->title = 'PAGE_ROLE_MANAGMENT';
+$this->title = Yii::t('userscube', 'PAGE_ROLE_MANAGMENT');
 $this->params['breadcrumbs'][] = $this->title;
 
 
@@ -91,6 +91,6 @@ echo GridView::widget([
     ]
 ]);
 
-echo Panel::end();
+Panel::end();
 
 ?>

@@ -39,4 +39,15 @@ return [
     'SIGNIN_FORM_SUBMIT_BTN_MESSAGE'    => 'Войти',
     'ERR_INCORRECT_PASSWORD'            => 'Неверный пароль',
     'ERR_NOT_FOUND'                     => 'не найдено',
+
+    //USERS
+    'PAGE_USERS'       => 'Пользователи',
+    'STATUS_CHOOSE'    => 'Статус...',
+    'STATUS_INACTIVE'  => 'Неактивен',
+    'STATUS_ACTIVE'    => 'Активен',
+    'STATUS_BLOCKED'   => 'Заблокирован',
+    'STATUS_DELETED'   => 'Удален',
+
+    //ROLE
+    'PAGE_ROLE_MANAGMENT'   => 'Роли',
 ];

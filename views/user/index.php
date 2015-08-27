@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use cubiclab\admin\widgets\Panel;
 
-$this->title = Yii::t('userscube', 'USERS');
+$this->title = Yii::t('userscube', 'PAGE_USERS');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -108,7 +108,7 @@ $boxButtons = !empty($boxButtons) ? implode(' ', $boxButtons) : null; ?>
         // 'updated_by',
         ['class' => 'yii\grid\ActionColumn'],
     ],
-]); ?>
+]);
 
-// End Panel
-<?php Panel::end(); ?>
+Panel::end();
+?>

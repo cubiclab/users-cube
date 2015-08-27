@@ -40,4 +40,6 @@ return [
     'ERR_INCORRECT_PASSWORD'            => 'Incorrect password',
     'ERR_NOT_FOUND'                     => 'not found',
 
+    //USERS
+    'PAGE_USERS'  => 'Users',
 ];
