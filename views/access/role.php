@@ -23,12 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
 $boxButtons[] = '{create}';
 $boxButtons = !empty($boxButtons) ? implode(' ', $boxButtons) : null;
 //Html::a('Добавить роль', ['add-role'], ['class' => 'btn btn-success'])
-
+$buttons['create'] = [
+    'url' => 'add-role'
+];
 Panel::begin(
     [
         'title' => $this->title,
         //'headStyle' => Panel::WARNING,
         //'fullColor' => true,
+        'buttons' => $buttons,
         'buttonsTemplate' => $boxButtons,
     ]
 );
