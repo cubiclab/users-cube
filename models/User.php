@@ -222,10 +222,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
 
     /** Deside delete user or just set a deleted status */
     public function delete(){
-        if( $this->status == User::STATUS_DELETED ){
+        if( $this->status == self::STATUS_DELETED ){
             parent::delete();
         } else {
-            $this->status = User::STATUS_DELETED;
+            $this->status = self::STATUS_DELETED;
             $this->save(false); // validation = false
         }
     }
