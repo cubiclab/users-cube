@@ -141,7 +141,7 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->deleteUser($this->findUser($id));
+        $this->findUser($id)->deleteUser();
         return $this->redirect(['index']);
     }
 
@@ -151,25 +151,11 @@ class UserController extends Controller
         if (($ids = Yii::$app->request->post('ids')) !== null) {
             $models = $this->findUser($ids);
             foreach ($models as $model) {
-                $this->deleteUser($model);
+                $model->deleteUser($model);
             }
             return $this->redirect(['index']);
         } else {
             throw new HttpException(400);
-        }
-    }
-
-    /**
-     * Deside delete user or just set a deleted status
-     *
-     * @param \cubiclab\users\models\User User
-     */
-    private function deleteUser($userModel){
-        if( $userModel->status == User::STATUS_DELETED ){
-            $userModel->delete();
-        } else {
-            $userModel->status = User::STATUS_DELETED;
-            $userModel->save(false); // validation = false
         }
     }
 
