@@ -37,18 +37,43 @@ class m200809_121517_init_user_table extends Migration
 
         // Profiles table
         $this->createTable('{{%users_profiles}}', [
-            'user_id'   => Schema::TYPE_PK,
-            'name'      => Schema::TYPE_STRING . '(50) NOT NULL',
-            'surname'   => Schema::TYPE_STRING . '(50) NOT NULL',
-            'phone'     => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
-            'address'   => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            'user_id'       => Schema::TYPE_PK,
+            'first_name'    => Schema::TYPE_STRING . '(50) NULL DEFAULT NULL',
+            'surname'       => Schema::TYPE_STRING . '(50) NULL DEFAULT NULL',
+            'patronymic'    => Schema::TYPE_STRING . '(50) NULL DEFAULT NULL',
+            'birth_date'    => Schema::TYPE_DATE . ' NULL DEFAULT NULL',
+            'gender'        => Schema::TYPE_SMALLINT . ' NULL DEFAULT NULL',
+            'phone'         => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            'address'       => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
+            'notes'         => Schema::TYPE_TEXT . ' NULL DEFAULT NULL',
         ], $tableOptions);
 
         // Foreign Keys
         $this->addForeignKey('FK_profile_user', '{{%users_profiles}}', 'user_id', '{{%users}}', 'id', 'CASCADE', 'CASCADE');
 
-        //TODO: Add a root user
+        // Add root user
+        $this->execute($this->createUserSql());
+        $this->execute($this->createProfileSql());
     }
+
+    /** @return string SQL to insert root user */
+    private function createUserSql()
+    {
+        $time = time();
+        $password_hash = Yii::$app->security->generatePasswordHash('root');
+        $auth_key = Yii::$app->security->generateRandomString();
+        return "INSERT INTO {{%users}} (id, username, password, email, auth_key, api_key, status, login_ip, login_time, created_at, updated_at, created_by, updated_by)
+                                VALUES (NULL, 'root', '$password_hash', 'root@cubiclab.ru', '$auth_key', '', 1, NULL , NULL , $time, $time, NULL, NULL)";
+    }
+
+    /** @return string SQL to insert first profile */
+    private function createProfileSql()
+    {
+        // not realised yet
+        return "INSERT INTO {{%users_profiles}} (user_id, first_name, surname, patronymic, birth_date, gender, phone, address, notes)
+                                         VALUES (1, 'First Name', 'Second Name', 'Father Name', NULL, 0, NULL, NULL, NULL)";
+    }
+
 
     public function safeDown()
     {
