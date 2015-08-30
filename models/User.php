@@ -41,7 +41,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
 
      /** @inheritdoc */
     public static function tableName(){
-        return static::getDb()->tablePrefix . "users";
+        return '{{%users}}';
     }
 
     /** @inheritdoc */
@@ -58,7 +58,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
             // password rules
             [['password'], 'string', 'min' => 4],
             [['password'], 'filter', 'filter' => 'trim'],
-            [['password'], 'required', 'on' => ['register', 'reset']]
+            [['password'], 'required', 'on' => ['register', 'reset', 'admin-create']],
+
+            [['status'], 'safe', 'on' => ['admin-create']],
+
         ];
     }
 

@@ -1,21 +1,29 @@
 <?php
 
 use yii\helpers\Html;
+use cubiclab\users\UsersCube;
+use cubiclab\admin\widgets\Panel;
 
+$this->title = Yii::t('userscube', 'PAGE_CREATE_USERS');
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Users */
-
-$this->title = Yii::t('app', 'Create Users');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('userscube', 'PAGE_USERS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+Panel::begin(
+    [
+        'title' => $this->title,
+    ]
+);
+
+echo $this->render(
+    '_form',
+    [
+        'user' => $user,
+        'roles' => $roles,
+        'statusArray' => $statusArray,
+    ]
+);
+
+Panel::end();
+
 ?>
-<div class="users-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>

@@ -41,5 +41,16 @@ return [
     'ERR_NOT_FOUND'                     => 'not found',
 
     //USERS
-    'PAGE_USERS'  => 'Users',
+    'PAGE_USERS'            => 'Users',
+    'PAGE_CREATE_USERS'     => 'Create User',
+    'STATUS_CHOOSE'         => 'Status',
+    'STATUS_INACTIVE'       => 'Inactive',
+    'STATUS_ACTIVE'         => 'Active',
+    'STATUS_BLOCKED'        => 'Blocked',
+    'STATUS_DELETED'        => 'Deleted',
+    'USER_CREATE_SUCCESS'   => 'New user has been successfully created',
+    'USER_CREATE_FAIL'      => 'New user creation failed',
+
+    //ROLE
+    'PAGE_ROLE_MANAGMENT'   => 'Roles',
 ];

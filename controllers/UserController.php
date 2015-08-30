@@ -1,29 +1,62 @@
 <?php
-/**
- * Controller to attache role for user for Yii2
- *
- * @author Elle <elleuz@gmail.com>
- * @version 0.1
- * @package UserController for Yii2
- *
- */
 
 namespace cubiclab\users\controllers;
 
 use Yii;
+use yii\web\Response;
+use yii\web\HttpException;
+use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\web\HttpException;
+use yii\widgets\ActiveForm;
 
+use cubiclab\admin\components\Controller;
 use cubiclab\users\models\User;
 use cubiclab\users\models\UserSearch;
 
+
 class UserController extends Controller
 {
-     public function actions()
+    /** @inheritdoc */
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['access']['rules'] = [
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['ACPUsersView']
+            ]
+        ];
+        $behaviors['access']['rules'][] = [
+            'allow' => true,
+            'actions' => ['create'],
+            'roles' => ['ACPUsersCreate']
+        ];
+        $behaviors['access']['rules'][] = [
+            'allow' => true,
+            'actions' => ['update'],
+            'roles' => ['ACPUsersUpdate']
+        ];
+        $behaviors['access']['rules'][] = [
+            'allow' => true,
+            'actions' => ['delete', 'mass-delete'],
+            'roles' => ['ACPUsersDelete']
+        ];
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'index' => ['get'],
+                'create' => ['get', 'post'],
+                'update' => ['get', 'put', 'post'],
+                'delete' => ['post', 'delete'],
+                'mass-delete' => ['post', 'delete']
+            ]
+        ];
+        return $behaviors;
+    }
+
+    public function actions()
     {
         return [
             'error' => [
@@ -31,22 +64,6 @@ class UserController extends Controller
             ],
         ];
     }
-
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'update' => ['POST'],
-                    'delete' => ['POST'],
-                    'mass-delete' => ['POST'],
-                    '*' => ['GET'],
-                ],
-            ],
-        ];
-    }
-
 
     /**
      * Users list page.
@@ -85,23 +102,42 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Users model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-/*    public function actionCreate()
+    /** Create user */
+    public function actionCreate()
     {
-        $model = new Users();
+        $user = new User(['scenario' => 'admin-create']);
+        $statusArray = User::getStatusArray();
+        $roles = ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($user->load(Yii::$app->request->post())) {
+            if ($user->validate()) {
+                if ($user->save(false)) {
+                    foreach(Yii::$app->request->post('roles') as $role)
+                    {
+                        $new_role = Yii::$app->authManager->getRole($role);
+                        Yii::$app->authManager->assign($new_role, $user->getId());
+                    }
+
+                    Yii::$app->session->setFlash('success', Yii::t('userscube', 'USER_CREATE_SUCCESS'));
+                    return $this->redirect(['update', 'id' => $user->id]);
+                } else {
+                    Yii::$app->session->setFlash('danger', Yii::t('userscube', 'USER_CREATE_FAIL'));
+                    return $this->refresh();
+                }
+            } elseif (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validate($user);
+            }
         }
-    }*/
+
+        return $this->render('create', [
+            'user' => $user,
+            'roles' => $roles,
+            'statusArray' => $statusArray
+        ]);
+    }
+
+
 
     /**
      * Updates an existing Users model.

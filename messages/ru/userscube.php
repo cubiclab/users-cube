@@ -41,13 +41,18 @@ return [
     'ERR_NOT_FOUND'                     => 'не найдено',
 
     //USERS
-    'PAGE_USERS'       => 'Пользователи',
-    'STATUS_CHOOSE'    => 'Статус...',
-    'STATUS_INACTIVE'  => 'Неактивен',
-    'STATUS_ACTIVE'    => 'Активен',
-    'STATUS_BLOCKED'   => 'Заблокирован',
-    'STATUS_DELETED'   => 'Удален',
+    'PAGE_USERS'            => 'Пользователи',
+    'PAGE_CREATE_USERS'     => 'Создать пользователя',
+    'STATUS_CHOOSE'         => 'Статус',
+    'STATUS_INACTIVE'       => 'Неактивен',
+    'STATUS_ACTIVE'         => 'Активен',
+    'STATUS_BLOCKED'        => 'Заблокирован',
+    'STATUS_DELETED'        => 'Удален',
+    'USER_CREATE_SUCCESS'   => 'Новый пользователь успешно создан',
+    'USER_CREATE_FAIL'      => 'Ошибка при создании новго пользователя',
 
     //ROLE
     'PAGE_ROLE_MANAGMENT'   => 'Роли',
+
+
 ];
