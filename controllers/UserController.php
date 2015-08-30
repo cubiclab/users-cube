@@ -141,7 +141,7 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findUser($id)->deleteUser();
+        $this->findUser($id)->delete();
         return $this->redirect(['index']);
     }
 
@@ -151,7 +151,7 @@ class UserController extends Controller
         if (($ids = Yii::$app->request->post('ids')) !== null) {
             $models = $this->findUser($ids);
             foreach ($models as $model) {
-                $model->deleteUser($model);
+                $model->delete($model);
             }
             return $this->redirect(['index']);
         } else {
