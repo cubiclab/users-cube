@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\HttpException;
 
 use cubiclab\users\models\User;
 use cubiclab\users\models\UserSearch;
@@ -39,6 +40,7 @@ class UserController extends Controller
                 'actions' => [
                     'update' => ['POST'],
                     'delete' => ['POST'],
+                    'mass-delete' => ['POST'],
                     '*' => ['GET'],
                 ],
             ],
@@ -133,16 +135,42 @@ class UserController extends Controller
     }*/
 
     /**
-     * Deletes an existing Users model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
+     * Delete user.
+     * @param integer $id User ID
+     * @return mixed View
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $this->deleteUser($this->findUser($id));
         return $this->redirect(['index']);
+    }
+
+    /** Delete multiple users page. */
+    public function actionMassDelete()
+    {
+        if (($ids = Yii::$app->request->post('ids')) !== null) {
+            $models = $this->findUser($ids);
+            foreach ($models as $model) {
+                $this->deleteUser($model);
+            }
+            return $this->redirect(['index']);
+        } else {
+            throw new HttpException(400);
+        }
+    }
+
+    /**
+     * Deside delete user or just set a deleted status
+     *
+     * @param \cubiclab\users\models\User User
+     */
+    private function deleteUser($userModel){
+        if( $userModel->status == User::STATUS_DELETED ){
+            $userModel->delete();
+        } else {
+            $userModel->status = User::STATUS_DELETED;
+            $userModel->save(false); // validation = false
+        }
     }
 
     /**
