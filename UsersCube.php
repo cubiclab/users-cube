@@ -41,6 +41,10 @@ class UsersCube extends \yii\base\Module implements BootstrapInterface
      */
     public $logoutRedirect = null;
 
+    /** @var bool Can't delete root user (id = 1) */
+    public $cantDeleteRoot = true;
+
+
     /** @inheritdoc */
     public function init()
     {

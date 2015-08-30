@@ -91,15 +91,7 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
-        $roles = ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
-        $user_permit = array_keys(Yii::$app->authManager->getRolesByUser($id));
-        $user = $this->findUser($id);
-        return $this->render('view', [
-            'user' => $user,
-            'roles' => $roles,
-            'user_permit' => $user_permit,
-            'moduleName' => Yii::$app->controller->module->id
-        ]);
+
     }
 
     /** Create user */
@@ -145,9 +137,28 @@ class UserController extends Controller
      * @param integer $id
      * @return mixed
      */
-/*    public function actionUpdate($id)
+    public function actionUpdate($id)
     {
+        $roles = ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
+        $user_permit = array_keys(Yii::$app->authManager->getRolesByUser($id));
         $user = $this->findUser($id);
+        //return $this->render('view', [
+        //    'user' => $user,
+        //    'roles' => $roles,
+        //    'user_permit' => $user_permit,
+         //   'moduleName' => Yii::$app->controller->module->id
+        //]);
+
+
+        return $this->render('update', [
+            'user' => $user,
+            'roles' => $roles,
+           'user_permit' => $user_permit,
+           'moduleName' => Yii::$app->controller->module->id
+        ]);
+
+
+/*        $user = $this->findUser($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -166,9 +177,8 @@ class UserController extends Controller
                 Yii::$app->authManager->assign($new_role, $user->getId());
             }
         }
-        return $this->redirect(Url::to(["/".Yii::$app->controller->module->id."/user/view", 'id' => $user->getId()]));
-
-    }*/
+        return $this->redirect(Url::to(["/".Yii::$app->controller->module->id."/user/view", 'id' => $user->getId()]));*/
+    }
 
     /**
      * Delete user.
