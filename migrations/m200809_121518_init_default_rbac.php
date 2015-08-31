@@ -26,10 +26,10 @@ class m200809_121518_init_default_rbac extends Migration
 
         //add default roles
         $roles = [
-            'RootAdmin' => 'Can access to ACP',
-            'Admin' => 'Can View Users',
-            'Moderator' => 'Can Create Users',
-            'User' => 'Can Update Users',
+            'RootAdmin' => 'Roor Administrator',
+            'Admin' => 'Administrator',
+            'Moderator' => 'Moderator',
+            'User' => 'User',
         ];
         foreach ($roles as $role => $description) {
             $role = Yii::$app->authManager->createRole($role);
@@ -37,10 +37,31 @@ class m200809_121518_init_default_rbac extends Migration
             Yii::$app->authManager->add($role);
         }
 
+        //set hierarchy
+        $parents_childs = [
+            'RootAdmin' => ['Admin'],
+            'Admin' => ['Moderator'],
+            'Moderator' => ['User'],
+        ];
+        foreach ($parents_childs as $parent => $childs) {
+            foreach ($childs as $child) {
+                Yii::$app->authManager->addChild(Yii::$app->authManager->getRole($parent), Yii::$app->authManager->getRole($child));
+            }
+        }
 
         //set permissions to roles
         $roles_permissions = [
-            'RootAdmin' => ['ACPAccessDashboard', 'ACPUsersView', 'ACPUsersCreate', 'ACPUsersUpdate', 'ACPUsersDelete']
+            //'RootAdmin' => [],
+            'Admin' => [
+                'ACPUsersCreate',
+                'ACPUsersUpdate',
+                'ACPUsersDelete'
+            ],
+            'Moderator' => [
+                'ACPAccessDashboard',
+                'ACPUsersView'
+            ],
+            //'User' => [],
         ];
         foreach ($roles_permissions as $role => $permissions) {
             foreach ($permissions as $permit) {
