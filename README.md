@@ -32,12 +32,5 @@ return [
 
 Apply migrations:
 
-    $ yii migrate --migrationPath="@vendor/cubiclab/users-cube/migrations"
     $ yii migrate --migrationPath=@yii/rbac/migrations/
-
-Add following Permissions:
-ACPAccessDashboard
-ACPUsersView
-ACPUsersCreate
-ACPUsersUpdate
-ACPUsersDelete
+    $ yii migrate --migrationPath="@vendor/cubiclab/users-cube/migrations"

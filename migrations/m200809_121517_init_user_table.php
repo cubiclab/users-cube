@@ -21,8 +21,7 @@ class m200809_121517_init_user_table extends Migration
             'auth_key'      => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
             'api_key'       => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
             'status'        => Schema::TYPE_SMALLINT . ' NOT NULL',
-            'login_ip'      => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
-            'login_time'    => Schema::TYPE_INTEGER . ' NULL DEFAULT NULL',
+            'avatar'        => Schema::TYPE_STRING . ' NULL DEFAULT NULL',
             'created_at'    => Schema::TYPE_INTEGER . ' NULL DEFAULT NULL',
             'updated_at'    => Schema::TYPE_INTEGER . ' NULL DEFAULT NULL',
             'created_by'    => Schema::TYPE_INTEGER . ' NULL DEFAULT NULL',
@@ -62,8 +61,8 @@ class m200809_121517_init_user_table extends Migration
         $time = time();
         $password_hash = Yii::$app->security->generatePasswordHash('root');
         $auth_key = Yii::$app->security->generateRandomString();
-        return "INSERT INTO {{%users}} (id, username, password, email, auth_key, api_key, status, login_ip, login_time, created_at, updated_at, created_by, updated_by)
-                                VALUES (NULL, 'root', '$password_hash', 'root@cubiclab.ru', '$auth_key', '', 1, NULL , NULL , $time, $time, NULL, NULL)";
+        return "INSERT INTO {{%users}} (id, username, password, email, auth_key, api_key, status, avatar, created_at, updated_at, created_by, updated_by)
+                                VALUES (NULL, 'root', '$password_hash', 'root@cubiclab.ru', '$auth_key', '', 1, NULL , $time, $time, NULL, NULL)";
     }
 
     /** @return string SQL to insert first profile */

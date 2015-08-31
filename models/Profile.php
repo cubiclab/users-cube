@@ -8,12 +8,16 @@ use Yii;
  * This is the model class for table "{{%users_profiles}}".
  *
  * @property integer $user_id
- * @property string $name
+ * @property string $first_name
  * @property string $surname
+ * @property string $patronymic
+ * @property string $birth_date
+ * @property integer $gender
  * @property string $phone
  * @property string $address
+ * @property string $notes
  *
- * @property User $user
+ * @property Users $user
  */
 class Profile extends \yii\db\ActiveRecord
 {
@@ -31,8 +35,10 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'surname'], 'required'],
-            [['name', 'surname'], 'string', 'max' => 50],
+            [['birth_date'], 'safe'],
+            [['gender'], 'integer'],
+            [['notes'], 'string'],
+            [['first_name', 'surname', 'patronymic'], 'string', 'max' => 50],
             [['phone', 'address'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -45,10 +51,14 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             'user_id' => Yii::t('app', 'User ID'),
-            'name' => Yii::t('app', 'Name'),
+            'first_name' => Yii::t('app', 'First Name'),
             'surname' => Yii::t('app', 'Surname'),
+            'patronymic' => Yii::t('app', 'Patronymic'),
+            'birth_date' => Yii::t('app', 'Birth Date'),
+            'gender' => Yii::t('app', 'Gender'),
             'phone' => Yii::t('app', 'Phone'),
             'address' => Yii::t('app', 'Address'),
+            'notes' => Yii::t('app', 'Notes'),
         ];
     }
 
