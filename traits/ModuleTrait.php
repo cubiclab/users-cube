@@ -27,7 +27,7 @@ trait ModuleTrait{
             if ($module instanceof UsersCube) {
                 $this->_module = $module;
             } else {
-                $this->_module = Yii::$app->getModule('userscube');
+                $this->_module = Yii::$app->getModule('users');
             }
         }
         return $this->_module;

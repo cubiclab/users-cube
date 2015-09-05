@@ -224,7 +224,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
 
     /** Deside delete user or just set a deleted status */
     public function delete(){
-        if( $this->id !== 1 && $this->module->cantDeleteRoot == true ){
+        if(!($this->id == 1 && $this->module->cantDeleteRoot == true)){
             if ($this->status == self::STATUS_DELETED) {
                 Yii::$app->authManager->revokeAll($this->getId());
                 parent::delete();
