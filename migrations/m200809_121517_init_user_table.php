@@ -53,6 +53,9 @@ class m200809_121517_init_user_table extends Migration
         // Add root user
         $this->execute($this->createUserSql());
         $this->execute($this->createProfileSql());
+
+        //Activate User Cube
+        $this->execute($this->activateUserCube());
     }
 
     /** @return string SQL to insert root user */
@@ -71,6 +74,13 @@ class m200809_121517_init_user_table extends Migration
         // not realised yet
         return "INSERT INTO {{%users_profiles}} (user_id, first_name, surname, patronymic, birth_date, gender, phone, address, notes)
                                          VALUES (1, 'First Name', 'Second Name', 'Father Name', NULL, 0, NULL, NULL, NULL)";
+    }
+
+    /** @return string SQL to activate user cube */
+    private function activateUserCube()
+    {
+        return "INSERT INTO {{%cubes}} (module_id, `name`, class, title, icon, settings, notice, `order`, status)
+                                VALUES (NULL, 'users', 'cubiclab\\users\\UsersCube', 'Users', 'fa-users', NULL, 0, 1, 1)";
     }
 
 

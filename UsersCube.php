@@ -3,20 +3,14 @@ namespace cubiclab\users;
 
 use Yii;
 use yii\base\BootstrapInterface;
-use yii\base\InvalidConfigException;
-use yii\db\ActiveRecord;
 
 /**
  * @version 0.0.1-prealpha
  */
 class UsersCube extends \yii\base\Module implements BootstrapInterface
 {
-
     /** @const VERSION Module version */
     const VERSION = "0.0.1-prealpha";
-
-    /** @var string Alias for module */
-    //public $alias = "@usercube";
 
     /** @var boolean If true after registration user will be required to confirm his e-mail address. */
     public $requireEmailConfirmation = true;
@@ -44,17 +38,22 @@ class UsersCube extends \yii\base\Module implements BootstrapInterface
     /** @var bool Can't delete root user (id = 1) */
     public $cantDeleteRoot = true;
 
+    /** @var array Default Settings */
+    public static $defaultSettings = [
+        'requireEmailConfirmation' => true,
+        'loginEmail'               => true,
+        'loginUsername'            => true,
+        'loginDuration'            => 2592000,
+        'loginRedirect'            => null,
+        'logoutRedirect'           => null,
+        'cantDeleteRoot'           => true,
+    ];
 
     /** @inheritdoc */
     public function init()
     {
         parent::init();
         $this->registerTranslations();
-
-        //$this->setAliases([
-        //    $this->alias => __DIR__,
-        //]);
-
     }
 
     public function registerTranslations()
@@ -75,6 +74,6 @@ class UsersCube extends \yii\base\Module implements BootstrapInterface
                 '<_a:(signin|signup|signout)>' => 'users/default/<_a>',
             ],
             false
-        );;
+        );
     }
 }

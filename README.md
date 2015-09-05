@@ -15,9 +15,9 @@ Add the following lines to your YII config:
 return [
     'language' => 'en', // 'ru'
     'modules' => [
-        'users' => [
-            'class' => 'cubiclab\users\UsersCube',
-        ],
+        'admin' => [
+            'class' => 'yii\admincube\AdminCube',
+         ],
     ],
     'components' => [
         'user' => [
@@ -33,4 +33,5 @@ return [
 Apply migrations:
 
     $ yii migrate --migrationPath=@yii/rbac/migrations/
+    $ yii migrate --migrationPath="@vendor/cubiclab/admin-cube/migrations"
     $ yii migrate --migrationPath="@vendor/cubiclab/users-cube/migrations"
