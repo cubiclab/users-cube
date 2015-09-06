@@ -41,13 +41,23 @@ class UsersCube extends \yii\base\Module implements BootstrapInterface
     /** @var array Default Settings */
     public static $defaultSettings = [
         'requireEmailConfirmation' => true,
-        'loginEmail'               => true,
-        'loginUsername'            => true,
-        'loginDuration'            => 2592000,
-        'loginRedirect'            => null,
-        'logoutRedirect'           => null,
-        'cantDeleteRoot'           => true,
+        'loginEmail' => true,
+        'loginUsername' => true,
+        'loginDuration' => 2592000,
+        'loginRedirect' => null,
+        'logoutRedirect' => null,
+        'cantDeleteRoot' => true,
     ];
+
+    public static $menu =
+        ['label' => 'Users', 'icon' => 'fa-users', 'items' => [
+            ['label' => 'All users', 'url' => ['/admin/users/user']],
+        ]];//,
+      //  ['label' => 'Access', 'items' => [
+       //     ['label' => 'Roles', 'url' => ['/admin/users/access/role']],
+        //    ['label' => 'Permissions', 'url' => ['/admin/users/access/permission']],
+        //]],
+   // ;
 
     /** @inheritdoc */
     public function init()
@@ -66,7 +76,8 @@ class UsersCube extends \yii\base\Module implements BootstrapInterface
         }
     }
 
-    public function bootstrap($app){
+    public function bootstrap($app)
+    {
         // Add module URL rules.
         $app->urlManager->addRules(
             [
