@@ -80,7 +80,7 @@ class m200809_121517_init_user_table extends Migration
     private function activateUserCube()
     {
         return "INSERT INTO {{%cubes}} (module_id, `name`, class, title, icon, settings, notice, `order`, status)
-                                VALUES (NULL, 'users', 'cubiclab\\users\\UsersCube', 'Users', 'fa-users', NULL, 0, 1, 1)";
+                                VALUES (NULL, 'users', 'cubiclab\\\\users\\\\UsersCube', 'Users', 'fa-users', NULL, 0, 1, 1)";
     }
 
 
