@@ -1,6 +1,6 @@
 <?php
 
-namespace cubiclab\users\controllers;
+namespace cubiclab\users\controllers\backend;
 
 use Yii;
 use yii\web\Response;

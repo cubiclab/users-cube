@@ -6,7 +6,7 @@
  * Time: 8:03
  */
 
-namespace cubiclab\users\controllers;
+namespace cubiclab\users\controllers\backend;
 
 use Yii;
 use yii\web\Controller;

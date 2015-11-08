@@ -2,15 +2,20 @@
 namespace cubiclab\users;
 
 use Yii;
-use yii\base\BootstrapInterface;
+use cubiclab\base\BaseCube;
 
 /**
  * @version 0.0.1-prealpha
  */
-class UsersCube extends \yii\base\Module implements BootstrapInterface
+class UsersCube extends BaseCube
 {
     /** @const VERSION Module version */
     const VERSION = "0.0.1-prealpha";
+
+    /**
+     * @inheritdoc
+     */
+    public static $name = 'users';
 
     /** @var boolean If true after registration user will be required to confirm his e-mail address. */
     public $requireEmailConfirmation = true;
@@ -76,7 +81,7 @@ class UsersCube extends \yii\base\Module implements BootstrapInterface
         }
     }
 
-    public function bootstrap($app)
+/*    public function bootstrap($app)
     {
         // Add module URL rules.
         $app->urlManager->addRules(
@@ -86,5 +91,5 @@ class UsersCube extends \yii\base\Module implements BootstrapInterface
             ],
             false
         );
-    }
+    }*/
 }
