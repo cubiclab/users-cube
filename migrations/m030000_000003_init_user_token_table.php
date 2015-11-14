@@ -8,7 +8,7 @@
 
 use yii\db\Migration;
 
-class m030000_000003_init_user_table extends Migration
+class m030000_000003_init_user_token_table extends Migration
 {
     public function safeUp()
     {
