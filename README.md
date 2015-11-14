@@ -33,5 +33,5 @@ return [
 Apply migrations:
 
     $ yii migrate --migrationPath=@yii/rbac/migrations/
-    $ yii migrate --migrationPath="@vendor/cubiclab/admin-cube/migrations"
-    $ yii migrate --migrationPath="@vendor/cubiclab/users-cube/migrations"
+    $ yii migrate --migrationPath=@cubiclab/admin/migrations/
+    $ yii migrate --migrationPath=@cubiclab/users/migrations/
