@@ -3,7 +3,7 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m200809_121517_init_user_table extends Migration
+class m030000_000001_init_user_table extends Migration
 {
     public function safeUp()
     {

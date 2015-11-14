@@ -3,7 +3,7 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m200809_121518_init_default_rbac extends Migration
+class m030000_000002_init_default_rbac extends Migration
 {
     public $sqls = [];
 
