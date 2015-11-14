@@ -8,8 +8,10 @@
 
 namespace cubiclab\users\models;
 
+use cubiclab\users\UsersCube;
 use Yii;
-use yii\base\NotSupportedException;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
@@ -22,7 +24,7 @@ use cubiclab\users\traits\ModuleTrait;
  * @property string $username
  * @property string $password
  */
-class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
+class User extends ActiveRecord implements IdentityInterface {
 
     use ModuleTrait;
 
@@ -68,19 +70,18 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
     /** @inheritdoc */
     public function attributeLabels(){
         return [
-            // db fields
-            'id'            => Yii::t('userscube', 'ATTR_ID'),
-            'username'      => Yii::t('userscube', 'ATTR_USERNAME'),
-            'password'      => Yii::t('userscube', 'ATTR_PASSWORD'),
-            'email'         => Yii::t('userscube', 'ATTR_EMAIL'),
-            'auth_key'      => Yii::t('userscube', 'ATTR_AUTH_KEY'),
-            'api_key'       => Yii::t('userscube', 'ATTR_API_KEY'),
-            'status'        => Yii::t('userscube', 'ATTR_STATUS'),
-            'avatar'        => Yii::t('userscube', 'ATTR_AVATAR'),
-            'created_at'    => Yii::t('userscube', 'ATTR_CREATED_AT'),
-            'updated_at'    => Yii::t('userscube', 'ATTR_UPDATED_AT'),
-            'created_by'    => Yii::t('userscube', 'ATTR_CREATED_BY'),
-            'updated_by'    => Yii::t('userscube', 'ATTR_UPDATED_BY'),
+            'id'            => UsersCube::t('userscube', 'ATTR_ID'),
+            'username'      => UsersCube::t('userscube', 'ATTR_USERNAME'),
+            'password'      => UsersCube::t('userscube', 'ATTR_PASSWORD'),
+            'email'         => UsersCube::t('userscube', 'ATTR_EMAIL'),
+            'auth_key'      => UsersCube::t('userscube', 'ATTR_AUTH_KEY'),
+            'api_key'       => UsersCube::t('userscube', 'ATTR_API_KEY'),
+            'status'        => UsersCube::t('userscube', 'ATTR_STATUS'),
+            'avatar'        => UsersCube::t('userscube', 'ATTR_AVATAR'),
+            'created_at'    => UsersCube::t('userscube', 'ATTR_CREATED_AT'),
+            'updated_at'    => UsersCube::t('userscube', 'ATTR_UPDATED_AT'),
+            'created_by'    => UsersCube::t('userscube', 'ATTR_CREATED_BY'),
+            'updated_by'    => UsersCube::t('userscube', 'ATTR_UPDATED_BY'),
         ];
     }
 

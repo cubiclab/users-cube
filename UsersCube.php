@@ -71,7 +71,7 @@ class UsersCube extends BaseCube
         $this->registerTranslations();
     }
 
-    public function registerTranslations()
+    public static function registerTranslations()
     {
         if (empty(Yii::$app->i18n->translations['userscube'])) {
             Yii::$app->i18n->translations['userscube'] = [
@@ -79,6 +79,12 @@ class UsersCube extends BaseCube
                 'basePath' => __DIR__ . '/messages',
             ];
         }
+    }
+
+    public static function t($category, $message, $params = [], $language = null)
+    {
+        UsersCube::registerTranslations();
+        return Yii::t($category, $message, $params, $language);
     }
 
 /*    public function bootstrap($app)

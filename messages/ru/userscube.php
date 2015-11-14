@@ -22,6 +22,10 @@ return [
     'ATTR_UPDATED_BY'    => 'Обновлено',
     'PATTERN_USERNAME'   => 'Поле может содержать только буквы, цифры и "_"',
     'ATTR_REMEMBER_ME'   => 'Запомнить',
+    'ATTR_USER_ID'       => 'ID пользователя',
+    'ATTR_TOKEN'         => 'Токен',
+    'ATTR_TOKEN_TYPE'    => 'Тип токена',
+    'ATTR_TOKEN_DATA'    => 'Дата токена',
 
     //Signup form
     'SIGNUP_FORM_WELCOME_TITLE'         => 'Регистрация',
