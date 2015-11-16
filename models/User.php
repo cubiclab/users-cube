@@ -55,7 +55,7 @@ class User extends ActiveRecord implements IdentityInterface {
             [['email', 'username'], 'unique'],
             [['email', 'username'], 'filter', 'filter' => 'trim'],
             [['email'], 'email'],
-            [['username'], 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u', 'message' => Yii::t('userscube', 'PATTERN_USERNAME')],
+            [['username'], 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u', 'message' => UsersCube::t('userscube', 'PATTERN_USERNAME')],
 
             // password rules
             [['password'], 'string', 'min' => 4],
@@ -186,6 +186,22 @@ class User extends ActiveRecord implements IdentityInterface {
         return false;
     }
 
+    public function afterSave($insert, $changedAttributes){
+        if (parent::afterSave($insert, $changedAttributes)) {
+            if ($this->isNewRecord) {
+
+                if($this->module->requireEmailConfirmation && self::STATUS_INACTIVE){
+                    $userToken = UserToken::generate($this->id, UserToken::TYPE_EMAIL_ACTIVATE);
+                    $this->sendEmailConfirmation($userToken);
+                }
+
+            }
+
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -197,10 +213,10 @@ class User extends ActiveRecord implements IdentityInterface {
     /** @return array Status array. */
     public static function getStatusArray(){
         return [
-            self::STATUS_INACTIVE   => Yii::t('userscube', 'STATUS_INACTIVE'),
-            self::STATUS_ACTIVE     => Yii::t('userscube', 'STATUS_ACTIVE'),
-            self::STATUS_BLOCKED    => Yii::t('userscube', 'STATUS_BLOCKED'),
-            self::STATUS_DELETED    => Yii::t('userscube', 'STATUS_DELETED'),
+            self::STATUS_INACTIVE   => UsersCube::t('userscube', 'STATUS_INACTIVE'),
+            self::STATUS_ACTIVE     => UsersCube::t('userscube', 'STATUS_ACTIVE'),
+            self::STATUS_BLOCKED    => UsersCube::t('userscube', 'STATUS_BLOCKED'),
+            self::STATUS_DELETED    => UsersCube::t('userscube', 'STATUS_DELETED'),
         ];
     }
 
@@ -234,6 +250,26 @@ class User extends ActiveRecord implements IdentityInterface {
                 $this->save(false); // validation = false
             }
         }
+    }
+
+    public function sendEmailConfirmation($userToken)
+    {
+        // modify view path to module views
+        $mailer = Yii::$app->mailer;
+        $oldViewPath = $mailer->viewPath;
+        $mailer->viewPath = $this->module->emailViewPath;
+
+        // send email
+        $email = $userToken->data ?: $this->email;
+        $subject = Yii::$app->id . " - " . UsersCube::t('userscube', 'EMAIL_CONFIRMATION');
+        $result = $mailer->compose('confirmEmail', compact("subject", "user", "userToken"))
+            ->setTo($email)
+            ->setSubject($subject)
+            ->send();
+
+        // restore view path and return result
+        $mailer->viewPath = $oldViewPath;
+        return $result;
     }
 
 }

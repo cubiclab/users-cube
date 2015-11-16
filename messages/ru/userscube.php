@@ -57,5 +57,9 @@ return [
     //ROLE
     'PAGE_ROLE_MANAGMENT'   => 'Роли',
 
+    //mail
+    'MAIL_CONFIRMATION_SUBJECT' => '',
+    'MAIL_CONFIRMATION_BODY'   => 'Please confirm your email address by clicking the link below:',
+
 
 ];

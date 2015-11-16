@@ -43,6 +43,9 @@ class UsersCube extends BaseCube
     /** @var bool Can't delete root user (id = 1) */
     public $cantDeleteRoot = true;
 
+    /** @var string Email view path */
+    public $emailViewPath = "@cubiclab/users/mail";
+
     /** @var array Default Settings */
     public static $defaultSettings = [
         'requireEmailConfirmation' => true,
@@ -52,6 +55,7 @@ class UsersCube extends BaseCube
         'loginRedirect' => null,
         'logoutRedirect' => null,
         'cantDeleteRoot' => true,
+        'emailViewPath' => '@cubiclab/users/mail',
     ];
 
     public static $menu =
