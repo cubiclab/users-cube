@@ -15,6 +15,29 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 <div class="profile-container">
     <div class="profile-section">
         <div class="profile-left">
+            <?= \dosamigos\fileupload\FileUpload::widget([
+                'model' => $user,
+                'attribute' => 'avatar',
+                'url' => ['media/upload', 'id' => $user->id], // your url, this is just for demo purposes,
+                'options' => ['accept' => 'image/*'],
+                'clientOptions' => [
+                    'maxFileSize' => 2000000
+                ],
+                // Also, you can specify jQuery-File-Upload events
+                // see: https://github.com/blueimp/jQuery-File-Upload/wiki/Options#processing-callback-options
+                'clientEvents' => [
+                    'fileuploaddone' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+                    'fileuploadfail' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+                ],
+            ]);?>
+
+
             <div class="profile-image">
                 <img src="assets/img/profile-cover.jpg">
                 <i class="fa fa-user hide"></i>
